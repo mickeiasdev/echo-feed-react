@@ -12,6 +12,12 @@
     --purple-500: #8548db;
 }
 
+/* aplica para todos os focus da pagina */
+:focus {
+    outline: 2px solid var(--purple-500);
+    outline-offset: 2px;
+}
+
 * {
     margin: 0;
     padding: 0;

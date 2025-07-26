@@ -26,16 +26,21 @@ export function Post() {
                 <p>
                     <a href="#">https://www.youtube.com/watch?v=8UVNT4wvIGY</a>
                 </p>
-                <p>
-                    <a href="#">#DiasEstranhos </a>
-                    <a href="#">#CoisasPequenas </a>
-                    <a href="#">#MoodDaSemana </a>
-                    <a href="#">#EstéticaMelancólica </a>
+                <p className={styles.hashtags}>
+                    <a href="#">#DiasEstranhos</a>
+                    <a href="#">#CoisasPequenas</a>
+                    <a href="#">#MoodDaSemana</a>
+                    <a href="#">#EstéticaMelancólica</a>
                 </p>
             </div>
 
-            <form>
-                <textarea/>
+            <form className={styles.commentForm}>
+                <strong>Deixe seu feedback</strong>
+
+                <textarea placeholder="Deixe um comentário" />
+                <footer>
+                    <button type="submit">Publicar</button>
+                </footer>
             </form>
         </article>
     )
