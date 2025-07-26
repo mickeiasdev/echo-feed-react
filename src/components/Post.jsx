@@ -44,7 +44,6 @@ export function Post() {
                 </footer>
             </form>
             <div className="commentList">
-                <strong>Comentários</strong>
                 <Comment />
                 <Comment />
                 <Comment />

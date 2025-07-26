@@ -134,3 +134,7 @@ apenas a header do primeiro nivel do .post
 .commentForm footer button[type="submit"]:hover {
     background: var(--purple-300);
 }
+
+.commentList {
+    margin-top: 2rem;
+}

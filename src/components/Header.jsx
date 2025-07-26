@@ -5,7 +5,6 @@ export function Header() {
     return (
         <header className={styles.header}>
             <img src={EchoLogoPurple} alt="Logo Echo" />
-            <strong >Echo Feed</strong>
         </header>
     )
 }   
