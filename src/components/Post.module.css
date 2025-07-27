@@ -39,7 +39,6 @@ contenha um outro post (primeiro nao sofre a auteracao
   gap: .5rem;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-top: 1rem;
   color: var(--purple-500);
 }
 
