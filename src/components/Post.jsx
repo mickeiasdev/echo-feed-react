@@ -18,13 +18,14 @@ import styles from "./Post.module.css"
 // content: "";
 
 export function Post({ author, content, publishedAt }) {
-    const [comments, setComments] = useState([]);
+    const [comments, setComments] = useState([
+        { id: uuidv4(), content: 'Comentaro inicial para teste...' }
+    ]);
 
     const [newComment, setNewComment] = useState("");
 
     const handleNewComment = (event) => {
         event.preventDefault();
-
         setNewComment(event.target.value);
     }
 
@@ -39,22 +40,30 @@ export function Post({ author, content, publishedAt }) {
 
         // aqui você poderia pegar o valor do textarea e adicionar como um novo comentário
         setComments([...comments, newCommentObject]);
-        console.log(comments)
         setNewComment("");
     }
 
-    const deleteComment = (comment) => {
-        console.log("Deletando comentário: ", comment);
+    const deleteComment = (commentDeleted) => {
+        const listCommentsWithoutDeleted = comments.filter(comment => (
+            comment.id !== commentDeleted
+        ));
 
+        setComments(listCommentsWithoutDeleted)
     }
+
+    const isNewButtonDisabled = newComment.length === 0;
 
     //formata a data de publicação
     //exemplo: 26 de julho às 20:38h
-    const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'", { locale: ptBr });
+    const publishedDateFormatted = format(
+        publishedAt, "d 'de' LLLL 'às' HH:mm'h'", { locale: ptBr }
+    );
 
     // calcula o tempo desde a publicação
     //exemplo: há 1 dia, há 3 horas, há 2 meses
-    const publishedTime = formatDistanceToNow(publishedAt, { locale: ptBr, addSuffix: true })
+    const publishedTime = formatDistanceToNow(
+        publishedAt, { locale: ptBr, addSuffix: true }
+    )
 
     return (
         <article className={styles.post}>
@@ -114,17 +123,22 @@ export function Post({ author, content, publishedAt }) {
                     value={newComment}
                     required
                 />
+
                 <footer>
-                    <button type="submit">Publicar</button>
+                    <button type="submit" disabled={isNewButtonDisabled}>
+                        Publicar
+                    </button>
                 </footer>
             </form>
+
             <div className="commentList">
                 {comments.map(comment => {
                     return (
                         <Comment
                             key={comment.id}
+                            id={comment.id}
                             content={comment.content}
-                            deleteComment={deleteComment}
+                            onDeleteComment={deleteComment}
                         />
                     )
                 })}

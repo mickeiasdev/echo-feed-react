@@ -123,8 +123,13 @@ apenas a header do primeiro nivel do .post
     font-size: 0.85rem;
 }
 
-.commentForm footer button[type="submit"]:hover {
+.commentForm footer button[type="submit"]:not(:disabled):hover {
     background: var(--purple-300);
+}
+
+.commentForm footer button[type="submit"]:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .commentList {
