@@ -60,12 +60,12 @@ export function Post({ author, content, publishedAt }) {
             </header>
 
             <div className={styles.content}>
-                {content.map((line, index) => {
+                {content.map(line => {
                     if (line.type === "paragraph") {
-                        return <p key={index}>{line.content}</p>
+                        return <p key={line}>{line.content}</p>
                     } else if (line.type === "link") {
                         return (
-                            <p key={index}>
+                            <p key={line}>
                                 <a href="#">{line.content}</a>
                             </p>
                         )
@@ -73,9 +73,9 @@ export function Post({ author, content, publishedAt }) {
                         // quando indentificamos que o tipo é "hashtag", renderizamos um conjunto de links em uma div
                         // com um estilo de flexbox para exibir as hashtags lado a lado
                         return (
-                            <div style={{ display: "flex", gap: ".5rem" }} key={index}>
-                                {line.content.map((hashtag, index) => (
-                                    <p key={index}><a href="#">#{hashtag}</a></p>
+                            <div style={{ display: "flex", gap: ".5rem" }}>
+                                {line.content.map(hashtag => (
+                                    <p key={hashtag}><a href="#">#{hashtag}</a></p>
                                 ))}
                             </div>
                         )
@@ -100,10 +100,10 @@ export function Post({ author, content, publishedAt }) {
                 </footer>
             </form>
             <div className="commentList">
-                {comments.map((comment, index)=> {
+                {comments.map(comment=> {
                     return (
                         <Comment
-                            key={index}
+                            key={comment}
                             content={comment}
                         />
                     )
