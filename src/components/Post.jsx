@@ -4,6 +4,10 @@ import { useState } from "react";
 import { format, formatDistanceToNow } from "date-fns";
 import ptBr from "date-fns/locale/pt-BR";
 
+// biblioteca de geração de IDs únicos
+// boa prática para os IDs dos comentário
+import { v4 as uuidv4 } from 'uuid';
+
 import { Comment } from "./Comment";
 import { Avatar } from "./Avatar";
 
@@ -28,9 +32,20 @@ export function Post({ author, content, publishedAt }) {
         // previne o comportamento padrão do formulário
         event.preventDefault();
 
+        const newCommentObject = {
+            id: uuidv4(),
+            content: newComment,
+        }
+
         // aqui você poderia pegar o valor do textarea e adicionar como um novo comentário
-        setComments([...comments, newComment]);
+        setComments([...comments, newCommentObject]);
+        console.log(comments)
         setNewComment("");
+    }
+
+    const deleteComment = (comment) => {
+        console.log("Deletando comentário: ", comment);
+
     }
 
     //formata a data de publicação
@@ -62,26 +77,30 @@ export function Post({ author, content, publishedAt }) {
             <div className={styles.content}>
                 {content.map(line => {
                     if (line.type === "paragraph") {
-                        return <p key={line}>{line.content}</p>
+                        return <p key={line.content}>{line.content}</p>
+
                     } else if (line.type === "link") {
                         return (
-                            <p key={line}>
+                            <p key={line.content}>
                                 <a href="#">{line.content}</a>
                             </p>
                         )
+
                     } else if (line.type === "hashtag") {
                         // quando indentificamos que o tipo é "hashtag", renderizamos um conjunto de links em uma div
                         // com um estilo de flexbox para exibir as hashtags lado a lado
                         return (
-                            <div style={{ display: "flex", gap: ".5rem" }}>
+                            <div key={line.content} style={{ display: "flex", gap: ".5rem" }}>
                                 {line.content.map(hashtag => (
                                     <p key={hashtag}><a href="#">#{hashtag}</a></p>
                                 ))}
                             </div>
                         )
+
                     } else {
                         console.warn(`Tipo de conteúdo desconhecido: ${line.type}`);
                         return null;
+
                     }
                 })}
             </div>
@@ -100,11 +119,12 @@ export function Post({ author, content, publishedAt }) {
                 </footer>
             </form>
             <div className="commentList">
-                {comments.map(comment=> {
+                {comments.map(comment => {
                     return (
                         <Comment
-                            key={comment}
-                            content={comment}
+                            key={comment.id}
+                            content={comment.content}
+                            deleteComment={deleteComment}
                         />
                     )
                 })}
