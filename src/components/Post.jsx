@@ -19,7 +19,7 @@ import styles from "./Post.module.css";
 
 export function Post({ author, content, publishedAt }) {
   const [comments, setComments] = useState([
-    { id: uuidv4(), content: "Comentaro inicial para teste..." },
+    { id: uuidv4(), content: "Comentario inicial para teste..." },
   ]);
 
   const [newComment, setNewComment] = useState("");
@@ -116,7 +116,7 @@ export function Post({ author, content, publishedAt }) {
                 ))}
               </div>
             );
-            
+
           } else {
             console.warn(`Tipo de conteúdo desconhecido: ${line.type}`);
             return null;
