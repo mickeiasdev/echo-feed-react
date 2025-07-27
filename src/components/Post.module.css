@@ -16,19 +16,11 @@ contenha um outro post (primeiro nao sofre a auteracao
   line-height: 1.6;
   color: var(--gray-400);
   margin-top: 1.5rem;
+  border-top: 1px solid var(--gray-500);
 }
 
 .content p {
   margin-top: 1rem;
-}
-
-.hashtags {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 1rem;
-  color: var(--purple-500);
 }
 
 .content a {
@@ -40,6 +32,15 @@ contenha um outro post (primeiro nao sofre a auteracao
 
 .content a:hover {
   color: var(--purple-300);
+}
+
+.hashtags {
+  display: flex;
+  gap: .5rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  color: var(--purple-500);
 }
 
 /* 
@@ -134,4 +135,30 @@ apenas a header do primeiro nivel do .post
 
 .commentList {
   margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .post {
+    padding: 1rem;
+  }
+
+  .post > header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .post > header time {
+    width: 100%;
+    text-align: end;
+  }
+
+  .commentForm textarea {
+    height: 5rem;
+    font-size: .75rem
+  }
+  .commentForm footer button[type="submit"] {
+    width: 100%;
+    font-size: 1.5rem;
+  }
 }

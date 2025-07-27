@@ -108,7 +108,7 @@ export function Post({ author, content, publishedAt }) {
             // quando indentificamos que o tipo é "hashtag", renderizamos um conjunto de links em uma div
             // com um estilo de flexbox para exibir as hashtags lado a lado
             return (
-              <div key={line.content} style={{ display: "flex", gap: ".5rem" }}>
+              <div className={styles.hashtags} key={line.content}>
                 {line.content.map((hashtag) => (
                   <p key={hashtag}>
                     <a href="#">#{hashtag}</a>
