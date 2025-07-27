@@ -6,7 +6,7 @@ import styles from "./App.module.css"
 
 import "./global.css"
 
-// author: { avatar_url: string; name: string; role: string; }
+// author: { avatarUrl: string; name: string; role: string; }
 // publishedAt: Date;
 // content: string[];
 
@@ -14,7 +14,7 @@ const posts = [
   {
     id: 1,
     author: {
-      avatar_url: "https://www.github.com/akitaonrails.png",
+      avatarUrl: "https://www.github.com/akitaonrails.png",
       name: "Fabio Akita",
       role: "Co-Founder Codeminer42"
     },
@@ -25,13 +25,14 @@ const posts = [
       { type: "paragraph", content: "Pequenas coisas ainda importam. Muito." },
       { type: "paragraph", content: "🎶 Trilha do momento:" },
       { type: "link", content: "https://www.youtube.com/watch?v=8UVNT4wvIGY" },
+      { type: "hashtag", content: ["SaúdeMental", "ProdutividadeTóxica", "Desacelera", "ViverÉMaisQuePostar"] },
     ],
     publishedAt: new Date("2025-07-26 20:38:00")
   },
   {
     id: 2,
     author: {
-      avatar_url: "https://www.github.com/danielhe4rt.png",
+      avatarUrl: "https://www.github.com/danielhe4rt.png",
       name: "Daniel Reis",
       role: "Founded He4rt Developers"
     },
@@ -43,7 +44,8 @@ const posts = [
       { type: "paragraph", content: "🔹 E o cliente sempre pede “só um botãozinho”" },
       { type: "paragraph", content: "Programar é igual montar Lego com peças que mudam de forma quando você vira de costas." },
       { type: "paragraph", content: "🧱✨" },
-      { type: "paragraph", content: "Ferramentas que me salvaram essa semana:" },
+      { type: "hashtag", content: ["VidaDeDev", "FrontendWarrior", "JavaScriptNãoPerdoa"] },
+      { type: "paragraph", content: "💻 Ferramentas que me salvaram essa semana:" },
       { type: "link", content: "https://devdocs.io" },
       { type: "link", content: "https://caniuse.com" },
       { type: "link", content: "https://css-tricks.com" },
@@ -54,8 +56,8 @@ const posts = [
   {
     id: 3,
     author: {
-      avatar_url: "filipedeschamps",
-      name: "https://www.github.com/filipedeschamps.png",
+      avatarUrl: "https://www.github.com/filipedeschamps.png",
+      name: "Filipe Deschamps",
       role: "Founder curso.dev"
     },
     content: [
@@ -63,7 +65,8 @@ const posts = [
       { type: "paragraph", content: "Todo mundo tentando parecer interessante, bem resolvido e feliz o tempo todo," },
       { type: "paragraph", content: "enquanto por dentro tá todo mundo no modo “salve-se quem puder”." },
       { type: "paragraph", content: "Likes viraram validação, stories viraram disputa, e ninguém mais consegue só… existir." },
-      { type: "paragraph", content: "Talvez o que falte seja menos filtro e mais verdade." }
+      { type: "paragraph", content: "Talvez o que falte seja menos filtro e mais verdade." },
+      { type: "hashtag", content: ["DesabafosDigitais", "VidaRealImporta", "OfflineTambémÉVida"] }
     ],
     publishedAt: new Date("2025-01-14 06:52:00")
   }

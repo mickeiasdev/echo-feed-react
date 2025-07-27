@@ -1,43 +1,61 @@
+// biblioteca de formatação de datas
+import { format, formatDistanceToNow } from "date-fns";
+import ptBr from "date-fns/locale/pt-BR";
+
 import styles from "./Post.module.css"
 import { Comment } from "./Comment";
 import { Avatar } from "./Avatar";
 
-// author: { avatar_url: string; name: string; role: string; }
+// author: { avatarUrl: ""; name: ""; role: ""; }
 // publishedAt: Date;
-// content: string[];
+// content: "";
 
-export function Post() {
+export function Post({ author, content, publishedAt }) {
+    //formata a data de publicação
+    //exemplo: 26 de julho às 20:38h
+    const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'", { locale: ptBr });
+    // calcula o tempo desde a publicação
+    //exemplo: há 1 dia, há 3 horas, há 2 meses
+    const publishedTime = formatDistanceToNow(publishedAt, { locale: ptBr, addSuffix: true })
     return (
         <article className={styles.post}>
             <header>
                 <div className={styles.author}>
-                    <Avatar src="https://github.com/diego3g.png"/>
+                    <Avatar src={author.avatarUrl} />
                     <div className={styles.authorInfo}>
-                        <strong>Mickeias Coelho</strong>
-                        <span>Web Developer</span>
+                        <strong>{author.name}</strong>
+                        <span>{author.role}</span>
                     </div>
                 </div>
-
-                <time title="25 de Julho às 20:06:00" dateTime="2025-07-25 20:06:00">
-                    Publicado há 1h
+                {/* toISOString() converte a data para o formato ISO 8601 */}
+                <time title={publishedDateFormatted} dateTime={publishedAt.toISOString()}>
+                    {publishedTime} atrás
                 </time>
             </header>
 
             <div className={styles.content}>
-                <p>Tem dias que tudo parece um filme indie em câmera lenta.</p>
-                <p>O céu meio nublado, a playlist triste tocando no fundo e aquele sentimento de que tá tudo meio fora do lugar…</p>
-                <p>Mas aí você vê alguém sorrindo na rua, ou escuta um "bom dia" sincero e as coisas se alinham por 5 segundos.</p>
-                <p>Pequenas coisas ainda importam. Muito.</p>
-                <p>🎶 Trilha do momento:</p>
-                <p>
-                    <a href="#">https://www.youtube.com/watch?v=8UVNT4wvIGY</a>
-                </p>
-                <p className={styles.hashtags}>
-                    <a href="#">#DiasEstranhos</a>
-                    <a href="#">#CoisasPequenas</a>
-                    <a href="#">#MoodDaSemana</a>
-                    <a href="#">#EstéticaMelancólica</a>
-                </p>
+                {content.map((line, index) => {
+                    if (line.type === "paragraph") {
+                        return <p key={index}>{line.content}</p>
+                    } else if (line.type === "link") {
+                        return (
+                            <p key={index}>
+                                <a href="#">{line.content}</a>
+                            </p>
+                        )
+                    } else if (line.type === "hashtag") {
+                        return (
+                            <div style={{ display: "flex", gap: ".5rem" }} key={index}>
+                                {line.content.map((hashtag, index) => (
+                                    <p key={index}><a href="#">#{hashtag}</a></p>
+                                ))}
+                            </div>
+                        )
+                    } else {
+                        console.warn(`Tipo de conteúdo desconhecido: ${line.type}`);
+                        return null;
+                    }
+                })}
             </div>
 
             <form className={styles.commentForm}>
